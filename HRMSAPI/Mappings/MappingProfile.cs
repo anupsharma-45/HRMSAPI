@@ -11,5 +11,9 @@ public class MappingProfile : Profile
         CreateMap<RegisterRequest, User>();
         CreateMap<User, AuthResponse>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
+
+        CreateMap<Organization, OrganizationDto>();
+        CreateMap<CreateOrganizationRequest, Organization>();
+        CreateMap<UpdateOrganizationRequest, Organization>();
     }
 }

@@ -69,16 +69,25 @@ public class UserRepository : BaseRepository<Models.Entities.User>, IUserReposit
     }
 }
 
+public class OrganizationRepository : BaseRepository<Models.Entities.Organization>, IOrganizationRepository
+{
+    public OrganizationRepository(AppDbContext context) : base(context)
+    {
+    }
+}
+
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;
     public IUserRepository Users { get; private set; }
+    public IOrganizationRepository Organizations { get; private set; }
     public IBaseRepository<Models.Entities.RefreshToken> RefreshTokens { get; private set; }
 
     public UnitOfWork(AppDbContext context)
     {
         _context = context;
         Users = new UserRepository(_context);
+        Organizations = new OrganizationRepository(_context);
         RefreshTokens = new BaseRepository<Models.Entities.RefreshToken>(_context);
     }
 

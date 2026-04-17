@@ -34,7 +34,7 @@ public class AppDbContext : DbContext
         // Organization Configuration
         modelBuilder.Entity<Organization>(entity =>
         {
-            entity.Property(e => e.Name).HasColumnName("CompanyName");
+            entity.Property(e => e.CompanyName).IsRequired().HasMaxLength(200);
         });
 
         // UserRole Configuration

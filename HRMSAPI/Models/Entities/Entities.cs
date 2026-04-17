@@ -55,19 +55,30 @@ public class UserRole
 public class Organization : BaseEntity
 {
     [Required, MaxLength(200)]
-    public string Name { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
 
-    [Required, MaxLength(50)]
-    public string Code { get; set; } = string.Empty;
+    [MaxLength(50)]
+    public string? GSTIN { get; set; }
 
-    [EmailAddress, MaxLength(100)]
-    public string? Email { get; set; }
-
-    [MaxLength(20)]
-    public string? Phone { get; set; }
-
-    public string? Address { get; set; }
     public bool IsActive { get; set; } = true;
+    public bool IsDeleted { get; set; } = false;
+    public Guid CreatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
+
+    [MaxLength(50)]
+    public string? Address1 { get; set; }
+    [MaxLength(50)]
+    public string? Address2 { get; set; }
+    [MaxLength(50)]
+    public string? City { get; set; }
+    [MaxLength(10)]
+    public string? StateCode { get; set; }
+    [MaxLength(25)]
+    public string? ZipCode { get; set; }
+    [MaxLength(25)]
+    public string? CountryCode { get; set; }
+    [MaxLength(25)]
+    public string? TimeZone { get; set; }
 
     // Navigation Properties
     public virtual ICollection<UserOrganization> UserOrganizations { get; set; } = new List<UserOrganization>();

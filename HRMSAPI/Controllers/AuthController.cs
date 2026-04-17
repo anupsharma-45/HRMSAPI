@@ -54,4 +54,16 @@ public class AuthController : BaseController
 
         return Ok(ApiResponse<AuthResponse>.SuccessResponse(response, "Token refreshed successfully"));
     }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+    {
+        var result = await _authService.LogoutAsync(request.RefreshToken);
+        if (!result)
+        {
+            return BadRequest(ApiResponse<object>.FailureResponse("Invalid or already revoked refresh token"));
+        }
+
+        return Ok(ApiResponse<object>.SuccessResponse(null, "Logged out successfully"));
+    }
 }

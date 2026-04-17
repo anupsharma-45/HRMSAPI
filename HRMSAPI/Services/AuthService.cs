@@ -135,4 +135,19 @@ public class AuthService : IAuthService
         await _unitOfWork.Users.AddAsync(user);
         return await _unitOfWork.CompleteAsync() > 0;
     }
+
+    public async Task<bool> LogoutAsync(string refreshToken)
+    {
+        var token = (await _unitOfWork.RefreshTokens.FindAsync(t => t.Token == refreshToken)).FirstOrDefault();
+
+        if (token == null || token.IsRevoked)
+        {
+            return false;
+        }
+
+        token.IsRevoked = true;
+        await _unitOfWork.CompleteAsync();
+
+        return true;
+    }
 }

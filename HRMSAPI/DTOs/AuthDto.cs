@@ -39,3 +39,9 @@ public class TokenRequest
     [Required]
     public string RefreshToken { get; set; } = string.Empty;
 }
+
+public class LogoutRequest
+{
+    [Required]
+    public string RefreshToken { get; set; } = string.Empty;
+}

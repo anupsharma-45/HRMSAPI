@@ -18,9 +18,14 @@ public interface IUserRepository : IBaseRepository<Models.Entities.User>
     Task<Models.Entities.User?> GetUserWithDetailsAsync(string email);
 }
 
+public interface IOrganizationRepository : IBaseRepository<Models.Entities.Organization>
+{
+}
+
 public interface IUnitOfWork : IDisposable
 {
     IUserRepository Users { get; }
+    IOrganizationRepository Organizations { get; }
     IBaseRepository<Models.Entities.RefreshToken> RefreshTokens { get; }
     Task<int> CompleteAsync();
 }
